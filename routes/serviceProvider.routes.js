@@ -1,6 +1,7 @@
 const express = require('express');
 const serviceProviderController = require('../controllers/serviceProvider.controller');
 const authController = require('../controllers/auth.controller');
+const reviewRouter = require('./review.routes');
 const { upload, uploadSingle } = require('../utils/multer');
 const { protect, restrictTo } = require('../middleware/auth.middleware');
 
@@ -16,6 +17,9 @@ router.post('/resend-verification', serviceProviderController.resendVerification
 
 // Protected routes (require authentication)
 router.use(protect);
+
+// Nested review routes
+router.use('/:serviceProviderId/reviews', reviewRouter);
 
 // Service Provider profile routes
 router.get('/me', serviceProviderController.getMe);
