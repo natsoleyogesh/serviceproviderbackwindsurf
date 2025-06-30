@@ -1,0 +1,67 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title= subject
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .content {
+        padding: 20px 0;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 20px 0;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+      .otp {
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-align: center;
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #f8f8f8;
+        border-radius: 4px;
+        border: 1px solid #eee;
+      }
+      .footer {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+      }
+  body
+    .header
+      h1 Verify Your Email Address
+    .content
+      p Hello #{firstName},
+      p Thank you for registering with us. To complete your registration, please verify your email address by entering the following OTP (One-Time Password) in the app:
+      .otp #{otp}
+      p This OTP is valid for 10 minutes.
+      p If you didn't create an account with us, please ignore this email.
+      p(style='margin-top: 30px; font-size: 14px; color: #666;')
+        | Having trouble? You can also click the button below to verify your email:
+        br
+        a(href=url style='color: #4CAF50;') #{url}
+    .footer
+      p This is an automated message, please do not reply to this email.
+      p © #{new Date().getFullYear()} Our Platform. All rights reserved.

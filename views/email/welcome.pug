@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title= subject
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .content {
+        padding: 20px 0;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 20px 0;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+      .footer {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+      }
+  body
+    .header
+      h1 Welcome to Our Platform!
+    .content
+      p Hello #{firstName},
+      p Thank you for registering with us. We're excited to have you on board!
+      p To get started, please verify your email address by clicking the button below:
+      p(style='text-align: center;')
+        a.button(href=url) Verify Email
+      p If the button doesn't work, copy and paste this link into your browser:
+      p(style='word-break: break-all;') #{url}
+      p If you didn't create an account with us, please ignore this email.
+    .footer
+      p © #{new Date().getFullYear()} Our Platform. All rights reserved.

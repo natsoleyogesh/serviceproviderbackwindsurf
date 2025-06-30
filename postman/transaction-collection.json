@@ -1,0 +1,182 @@
+{
+  "info": {
+    "name": "Transaction API",
+    "description": "API endpoints for managing transactions and payments",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Create Transaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingId\": \"60d5ec9d8c1a8e3a3c8b4567\",\n  \"amount\": 999,\n  \"paymentMethod\": \"razorpay\",\n  \"razorpayPaymentId\": \"pay_xyz123\",\n  \"razorpayOrderId\": \"order_xyz123\",\n  \"razorpaySignature\": \"abc123xyz456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/transactions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "transactions"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Transactions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/transactions?status=captured&paymentMethod=razorpay&page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "transactions"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "captured"
+                },
+                {
+                  "key": "paymentMethod",
+                  "value": "razorpay"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Transaction by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/transactions/{{transactionId}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "transactions", "{{transactionId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Transaction Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"refunded\",\n  \"metadata\": {\n    \"refundReason\": \"Customer requested refund\",\n    \"refundedBy\": \"admin@example.com\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/transactions/{{transactionId}}/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "transactions", "{{transactionId}}", "status"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Razorpay Payment Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/transactions/razorpay/pay_xyz123",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "transactions", "razorpay", "pay_xyz123"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Add any pre-request scripts here"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Add test scripts here",
+          "pm.test(\"Status code is 200\", function () {",
+          "    pm.response.to.have.status(200);",
+          "});"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "userToken",
+      "value": "",
+      "description": "JWT token obtained after user login"
+    },
+    {
+      "key": "adminToken",
+      "value": "",
+      "description": "JWT token obtained after admin login"
+    },
+    {
+      "key": "transactionId",
+      "value": "",
+      "description": "Transaction ID to be used in requests"
+    }
+  ]
+}

@@ -1,0 +1,385 @@
+{
+  "info": {
+    "name": "Admin Services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for Admin Services API"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api/v1",
+      "type": "string",
+      "description": "Base URL for the API"
+    },
+    {
+      "key": "adminToken",
+      "value": "your-admin-jwt-token-here",
+      "type": "string",
+      "description": "JWT token for admin authentication"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{adminToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register Admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Admin User\",\n    \"email\": \"admin@example.com\",\n    \"password\": \"Admin@123\",\n    \"passwordConfirm\": \"Admin@123\",\n    \"role\": \"admin\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}/auth/register"]
+            }
+          }
+        },
+        {
+          "name": "Login Admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"Admin@123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}/auth/login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": ["{{baseUrl}}/auth/me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Main Services",
+      "item": [
+        {
+          "name": "Create Main Service",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Home Services",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "All home related services",
+                  "type": "text"
+                },
+                {
+                  "key": "cities",
+                  "value": "[\"60d5ec9d8c1a8e3a3c8b4567\", \"60d5ec9d8c1a8e3a3c8b4568\"]",
+                  "type": "text",
+                  "description": "Array of city IDs where service is available"
+                },
+                {
+                  "key": "isAvailableNationwide",
+                  "value": "false",
+                  "type": "text",
+                  "description": "Set to true if service is available nationwide"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/services/main",
+              "host": ["{{baseUrl}}/services/main"]
+            }
+          }
+        },
+        {
+          "name": "Get All Main Services",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/services/main",
+              "host": ["{{baseUrl}}/services/main"]
+            }
+          }
+        },
+        {
+          "name": "Get Main Service by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/services/main/:id",
+              "host": ["{{baseUrl}}/services/main/:id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "main-service-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Main Service",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Updated Service Name",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Updated description",
+                  "type": "text"
+                },
+                {
+                  "key": "cities",
+                  "value": "[\"60d5ec9d8c1a8e3a3c8b4569\"]",
+                  "type": "text",
+                  "description": "Update array of city IDs where service is available"
+                },
+                {
+                  "key": "isAvailableNationwide",
+                  "value": "false",
+                  "type": "text",
+                  "description": "Set to true if service is available nationwide"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/services/main/:id",
+              "host": ["{{baseUrl}}/services/main/:id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "main-service-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Main Service",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/services/main/:id",
+              "host": ["{{baseUrl}}/services/main/:id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "main-service-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Cities to Service",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cities\": [\"60d5ec9d8c1a8e3a3c8b4569\", \"60d5ec9d8c1a8e3a3c8b4570\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/services/main/:id/cities",
+              "host": ["{{baseUrl}}/services/main/:id/cities"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "main-service-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remove Cities from Service",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cities\": [\"60d5ec9d8c1a8e3a3c8b4570\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/services/main/:id/cities",
+              "host": ["{{baseUrl}}/services/main/:id/cities"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "main-service-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Nationwide Availability",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/services/main/:id/toggle-nationwide",
+              "host": ["{{baseUrl}}/services/main/:id/toggle-nationwide"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "main-service-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Check Service Availability",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/services/main/:id/availability?city=60d5ec9d8c1a8e3a3c8b4567",
+              "host": ["{{baseUrl}}/services/main/:id/availability"],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "60d5ec9d8c1a8e3a3c8b4567"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "main-service-id-here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sub-Services",
+      "item": [
+        {
+          "name": "Create Sub-Service",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Cleaning Service",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Professional cleaning services",
+                  "type": "text"
+                },
+                {
+                  "key": "mainService",
+                  "value": "main-service-id-here",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/services/sub",
+              "host": ["{{baseUrl}}/services/sub"]
+            }
+          }
+        },
+        {
+          "name": "Get All Sub-Services",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/services/sub",
+              "host": ["{{baseUrl}}/services/sub"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

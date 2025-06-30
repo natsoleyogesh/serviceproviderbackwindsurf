@@ -1,0 +1,150 @@
+{
+  "info": {
+    "name": "Tax Configuration API",
+    "description": "API for managing tax configurations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Active Tax Config (Public)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/taxconfig",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "taxconfig"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Tax Configs (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/taxconfig/admin",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "taxconfig", "admin"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Tax Config (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"visitationFee\": 50,\n  \"taxesPercentage\": 15\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/taxconfig/admin",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "taxconfig", "admin"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Tax Config (Admin)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"visitationFee\": 75,\n  \"taxesPercentage\": 18.5,\n  \"isActive\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/taxconfig/admin/{{tax_config_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "taxconfig", "admin", "{{tax_config_id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Tax Config (Admin)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/taxconfig/admin/{{tax_config_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "taxconfig", "admin", "{{tax_config_id}}"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          ""
+        ],
+        "type": "text/javascript"
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "exec": [
+          ""
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "admin_token",
+      "value": "your_admin_jwt_token_here"
+    },
+    {
+      "key": "tax_config_id",
+      "value": ""
+    }
+  ]
+}
